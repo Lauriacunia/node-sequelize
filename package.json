@@ -1,0 +1,20 @@
+{
+  "name": "sequelize",
+  "version": "1.0.0",
+  "description": "# 🔥📲 ¿Cómo crear proyecto Node Js?",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mysql2": "^3.9.7",
+    "sequelize": "^6.37.3"
+  }
+}
