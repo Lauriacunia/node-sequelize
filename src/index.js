@@ -1,15 +1,10 @@
 import express from "express";
-const app = express();
-import Sequelize from "sequelize";
-import mysql2 from "mysql2";
 import CONFIG from "./config/config.js";
-const { PORT, DB_HOST, DB_NAME, DB_USER, DB_PASS } = CONFIG;
+const { PORT } = CONFIG;
 
-const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASS, {
-  host: DB_HOST,
-  dialect: "mysql",
-});
+import { conectMySQL } from "./config/mysql.connection.js";
 
+const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -17,9 +12,16 @@ app.get("/", (req, res) => {
   res.send(` <h1>Servidor corriendo en puerto: ${PORT} 💫</h1>`);
 });
 
+// MySQL connection
+await conectMySQL();
+
+// Server
 try {
-  await sequelize.authenticate();
-  console.log("Connection has been established successfully.");
+  app.listen(PORT, () =>
+    console.log(
+      `🚀 Server started on PORT ${PORT} at ${new Date().toLocaleString()}`
+    )
+  );
 } catch (error) {
-  console.error("Unable to connect to the database:", error);
+  console.log("💥 Error al iniciar servidor", error);
 }
