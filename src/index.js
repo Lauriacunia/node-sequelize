@@ -12,6 +12,10 @@ app.get("/", (req, res) => {
   res.send(` <h1>Servidor corriendo en puerto: ${PORT} 💫</h1>`);
 });
 
+// Routes
+import indexRoutes from "./routes/index.routes.js";
+app.use("/api", indexRoutes);
+
 // MySQL connection
 await conectMySQL();
 
